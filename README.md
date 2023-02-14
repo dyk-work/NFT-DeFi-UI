@@ -1,8 +1,8 @@
-# Nativo NFT - User interface
+# NFT-DeFi - User interface
 
 Nativo NFT is a marketplace builded over NEAR Protocol. It is building the next generation of NFT-DeFi mechanism for NFT ecosystem.
 
-## Nativo NFT UI features
+## NFT-DeFi UI features
 1. View of collections [x]
 2. View of NFT Market [x]
 3. View profile [x]
