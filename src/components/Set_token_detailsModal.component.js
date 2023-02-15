@@ -124,7 +124,7 @@ export default function Set_token_detailModal(props) {
       });
     }
 
-    if (colID_m >= 0) {
+    if (colID_m > 0) {
       
 
       let Col_payload = {
@@ -302,113 +302,113 @@ export default function Set_token_detailModal(props) {
     })();
   }, []);
 
-  // async function handleAddToken() {
-  //   console.log("Hola este es el handle")
-  //   console.log(colID)
-  //   if (colID <= -1) {
-  //     Swal.fire({
-  //       title: t('addToken.alert1-title'),
-  //       text: t('addToken.alert1-msg'),
-  //       icon: 'error',
-  //       confirmButtonColor: '#E79211'
-  //     })
-  //     return
-  //   }
-  //   Swal.fire({
-  //     title: t('addToken.alert2-title'),
-  //     text: t('addToken.alert2-msg'),
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#E79211',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: "Agregar NFT"
-  //   }).then(async (result) => {
-  //     if (result.isConfirmed) {
-  //       console.log("Agregando NFT a una coleccion")
-  //       let payload = {
-  //         contract_id: process.env.REACT_APP_CONTRACT,
-  //         owner_id: props.tokens.owner,
-  //         token_id: props.tokens.tokenID,
-  //         title: props.jdata.title,
-  //         description: props.jdata.description,
-  //         media: props.jdata.image,
-  //         creator: props.jdata.creator,
-  //         price: 10,
-  //         collection_id: parseInt(colID)
-  //       }
-  //       console.log(payload)
-  //       // ext_call(process.env.REACT_APP_CONTRACT_MARKET, 'add_token_to_collection', payload, 300000000000000, 1)
-  //       const wallet = await selector.wallet();
-  //       wallet.signAndSendTransaction({
-  //         signerId: accountId,
-  //         receiverId: process.env.REACT_APP_CONTRACT_MARKET,
-  //         actions: [
-  //           {
-  //             type: "FunctionCall",
-  //             params: {
-  //               methodName: "add_token_to_collection",
-  //               args: payload,
-  //               gas: 300000000000000,
-  //               deposit: 1,
-  //             }
-  //           }
-  //         ]
-  //       })
-  //     }
-  //   })
-  // }
-  // //Configuramos el formulario para ofertar por un token
-  // const formik = useFormik({
-  //   initialValues: {
-  //     terms: false,
-  //     price: 0
-  //   },
-  //   validationSchema: Yup.object({
-  //     price: Yup.number()
-  //       .required("Requerido")
-  //       .positive("El precio debe ser positivo")
-  //       .moreThan(0.09999999999999, "El precio minimo para el NFT es de 0.1")
-  //       .min(0.1, "El precio no debe de ser menor 0.1"),
-  //     terms: Yup.bool()
-  //       .required("Requerido")
-  //   }),
-  //   //Metodo para el boton ofertar del formulario
-  //   onSubmit: async (values) => {
-  //     let ofertar;
-  //     let contract = await getNearContract();
-  //     let payload = {
-  //       nft_contract_id: process.env.REACT_APP_CONTRACT,
-  //       token_id: props.tokens.tokenID,
-  //       owner_id: props.tokens.owner
-  //     };
-  //     console.log(props.tokens)
+  async function handleAddToken() {
+    console.log("Hola este es el handle")
+    console.log(colID_m)
+    if (colID_m <= -1) {
+      Swal.fire({
+        title: t('addToken.alert1-title'),
+        text: t('addToken.alert1-msg'),
+        icon: 'error',
+        confirmButtonColor: '#E79211'
+      })
+      return
+    }
+    Swal.fire({
+      title: t('addToken.alert2-title'),
+      text: t('addToken.alert2-msg'),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#E79211',
+      cancelButtonColor: '#d33',
+      confirmButtonText: "Agregar NFT"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        console.log("Agregando NFT a una coleccion")
+        let payload = {
+          contract_id: process.env.REACT_APP_CONTRACT,
+          owner_id: props.tokens.owner,
+          token_id: props.tokens.tokenID,
+          title: props.jdata.title,
+          description: props.jdata.description,
+          media: props.jdata.image,
+          creator: props.jdata.creator,
+          price: 10,
+          collection_id: parseInt(colID_m)
+        }
+        console.log(payload)
+        // ext_call(process.env.REACT_APP_CONTRACT_MARKET, 'add_token_to_collection', payload, 300000000000000, 1)
+        const wallet = await selector.wallet();
+        wallet.signAndSendTransaction({
+          signerId: accountId,
+          receiverId: process.env.REACT_APP_CONTRACT_MARKET,
+          actions: [
+            {
+              type: "FunctionCall",
+              params: {
+                methodName: "add_token_to_collection",
+                args: payload,
+                gas: 300000000000000,
+                deposit: 1,
+              }
+            }
+          ]
+        })
+      }
+    })
+  }
+  //Configuramos el formulario para ofertar por un token
+  const formik = useFormik({
+    initialValues: {
+      terms: false,
+      price: 0
+    },
+    validationSchema: Yup.object({
+      price: Yup.number()
+        .required("Requerido")
+        .positive("El precio debe ser positivo")
+        .moreThan(0.09999999999999, "El precio minimo para el NFT es de 0.1")
+        .min(0.1, "El precio no debe de ser menor 0.1"),
+      terms: Yup.bool()
+        .required("Requerido")
+    }),
+    //Metodo para el boton ofertar del formulario
+    onSubmit: async (values) => {
+      let ofertar;
+      let contract = await getNearContract();
+      let payload = {
+        nft_contract_id: process.env.REACT_APP_CONTRACT,
+        token_id: props.tokens.tokenID,
+        owner_id: props.tokens.owner
+      };
+      console.log(props.tokens)
 
-  //     let amountVal = values.price;
-  //     let amount = fromNearToYocto(amountVal);
-  //     let bigAmount = BigInt(amount);
-  //     if (!values.terms) {
-  //       Swal.fire({
-  //         title: t("Modal.transAlert2"),
-  //         text: t("Modal.offerAlert1Txt"),
-  //         icon: 'error',
-  //         confirmButtonColor: '#E79211'
-  //       })
-  //       return
-  //     }
-  //     if (props.tokens.bidPrice != "" && values.price <= props.tokens.bidPrice) {
-  //       Swal.fire({
-  //         title: t("Modal.offerAlert2"),
-  //         text: t("Modal.offerAlert2Txt-1"),
-  //         icon: 'error',
-  //         confirmButtonColor: '#E79211'
-  //       })
-  //       return
-  //     }
-  //     ext_call(process.env.REACT_APP_CONTRACT_MARKET, 'add_offer', payload, 300000000000000, amount)
+      let amountVal = values.price;
+      let amount = fromNearToYocto(amountVal);
+      let bigAmount = BigInt(amount);
+      if (!values.terms) {
+        Swal.fire({
+          title: t("Modal.transAlert2"),
+          text: t("Modal.offerAlert1Txt"),
+          icon: 'error',
+          confirmButtonColor: '#E79211'
+        })
+        return
+      }
+      if (props.tokens.bidPrice != "" && values.price <= props.tokens.bidPrice) {
+        Swal.fire({
+          title: t("Modal.offerAlert2"),
+          text: t("Modal.offerAlert2Txt-1"),
+          icon: 'error',
+          confirmButtonColor: '#E79211'
+        })
+        return
+      }
+      ext_call(process.env.REACT_APP_CONTRACT_MARKET, 'add_offer', payload, 300000000000000, amount)
 
-  //     setState({ disabled: false });
-  //   },
-  // });
+      setState({ disabled: true });
+    },
+  });
 
   return (
     props.show && (
