@@ -20,7 +20,7 @@ import {
 import { uploadFileAPI } from "../utils/pinata";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
-//import trashIcon from "../assets/img/bin.png";
+import trashIcon from "../assets/img/bin.png";
 import { useWalletSelector } from "../utils/walletSelector";
 import { Button } from "@mui/material";
 
@@ -857,19 +857,21 @@ function LightHeroE(props) {
 
                       <div className="flex ">
                       <p className="text-black content-en leading-5 mb-2 font-open-sans tracking-[3.45px] text-sm md:text-md ">
-                                              {t("tokCollection.createdBy")} : 
-                                                
-                                            </p>
-                                            <p className="text-black content-en  mb-2 font-open-sans font-bold text-sm md:text-md ">
-                                              
-                                              {  window.localStorage.getItem("logged_account")}
-                                            </p>
+                        {t("tokCollection.createdBy")} : 
+                          
+                      </p>
+                      <p className="text-black content-en  mb-2 font-open-sans font-bold text-sm md:text-md ">
+                        
+                        {  window.localStorage.getItem("logged_account")}
+                        </p>
                       </div>
                      
                     </div>
                   </div>
                 </div>
-              {/* <div
+              {
+              <>
+              <div
                 name="nft_detail"
                 className={
                   "  px-4 md:px-8  mx-auto   mt-4 md:mt-16    w-11/12 h-full    md:w-3/5  lg:w-6/12 xl:w-6/12	       drop-shadow-xl       md:flex-row flex-col  md:justify-center xl:justify-center    "
@@ -934,7 +936,9 @@ function LightHeroE(props) {
                     </p>
                   </div>
                 </div>
-              </div> */}
+              </div>
+              </>
+              }
             </div>
             {
                 window.innerWidth >=640  &&

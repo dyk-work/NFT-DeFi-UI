@@ -18,7 +18,7 @@ export default function PriceModal(props) {
   const [state, setState] = useState({ disabled: false});
   const [t, i18n] = useTranslation("global")
   const [highestbidder, setHighestbidder] = useState(0);
-  
+  const [bigAmount, setBigAmount] = useState(0)
   useEffect(() => {
     if (props.tokens) {
       setHighestbidder(props.tokens.highestbidder);
@@ -117,31 +117,31 @@ export default function PriceModal(props) {
 
    
         
-      // if (highestbidder != 'notienealtos') {
-      //   if (bigAmount <= BigInt(highestbidder)) {
-      //     Swal.fire({
-      //       title: 'El Precio es menor a la ultima oferta',
-      //       text: 'Para poder ofertar por este NFT es necesario que el precio mayor a la ultima oferta',
-      //       icon: 'error',
-      //       confirmButtonColor: '#E79211'
-      //     })
-      //     return
-      //   }
-      // }
+      if (highestbidder != 'notienealtos') {
+        if (bigAmount <= BigInt(highestbidder)) {
+          Swal.fire({
+            title: 'El Precio es menor a la ultima oferta',
+            text: 'Para poder ofertar por este NFT es necesario que el precio mayor a la ultima oferta',
+            icon: 'error',
+            confirmButtonColor: '#E79211'
+          })
+          return
+        }
+      }
         
 
         
-      //   ofertar = await contract.market_bid_generic(
-      //     payload,
-      //     300000000000000, // attached GAS (optional)
-      //     bigAmount.toString()//amount
-      //   ).
-      //   catch(e=>{
-      //     console.log('error',e);
-      //   });
+        ofertar = await contract.market_bid_generic(
+          payload,
+          300000000000000, // attached GAS (optional)
+          bigAmount.toString()//amount
+        ).
+        catch(e=>{
+          console.log('error',e);
+        });
       
 
-      // setState({ disabled: false });
+      setState({ disabled: false });
     },
   });
 

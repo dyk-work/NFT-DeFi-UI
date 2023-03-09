@@ -92,7 +92,7 @@ function LightEcommerceA() {
 
   const { tokenid: owner } = useParams();
   React.useEffect(() => {
-    // console.log("esto ---> ",owner);
+    console.log("esto ---> ",owner);
     let tokData
     let colData
     setload(c => true);
@@ -372,7 +372,9 @@ function LightEcommerceA() {
                       </a>
                     </div>
 
-                  {/* <div className="w-full md:w-1/2 lg:w-1/3 p-4 " key={index}>
+                  {
+                  <>
+                  <div className="w-full md:w-1/2 lg:w-1/3 p-4 " key={index}>
                     <a
                       href={"/detail/" + i.tokenId}
                     >
@@ -410,7 +412,8 @@ function LightEcommerceA() {
                         </div>
                       </div>
                     </a>
-                  </div> */}
+                  </div> 
+                  </>}
                   </>
 
                 )
