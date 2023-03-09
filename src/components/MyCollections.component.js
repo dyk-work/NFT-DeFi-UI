@@ -97,12 +97,6 @@ function MyCollections(props) {
 
   const APIURL = process.env.REACT_APP_API_TG
 
-
- 
-
-
-
-
   const [state, setState] = React.useState({
     items: Array.from({ length: 400 }),
     hasMore: true,
@@ -116,10 +110,7 @@ function MyCollections(props) {
     });
   }
 
-
-
   //Hook para el manejo de efectos
- 
 
   React.useEffect(() => {
     const query = new URLSearchParams(location);
@@ -127,9 +118,8 @@ function MyCollections(props) {
     let user = query.get('pathname').split('/')[1] + (process.env.REACT_APP_NEAR_ENV == 'mainnet' ? '.near' : '.testnet');
     setProfile({ user: user}); 
     
+    // console.log("queryonfo",colSort + colSortOrd)
 
- 
-    console.log("queryonfo",colSort + colSortOrd)
     async function getColData() {
         const queryData = `
         query($first: Int, $account: String){
@@ -204,16 +194,16 @@ function MyCollections(props) {
     await delay(1)
     var sort
     var last
-    if (colSortOrd == 'asc') {
+    if (colSortOrd === 'asc') {
         sort = 'gt'
     }
-    else if (colSortOrd == 'desc') {
+    else if (colSortOrd === 'desc') {
         sort = 'lt'
     }
-    if (colSort == 'collectionID') {
+    if (colSort === 'collectionID') {
         last = lastID.toString()
     }
-    else if (colSort == 'title') {
+    else if (colSort === 'title') {
         last = lastName
     }
     let colData;
@@ -278,8 +268,8 @@ function MyCollections(props) {
  
 
   let handleSortCollections = (data) => {
-    if ('TimeDesc' == data.target.value) {
-        if (colSortOrd == 'desc' && colSort == 'collectionID') {
+    if ('TimeDesc' === data.target.value) {
+        if (colSortOrd === 'desc' && colSort == 'collectionID') {
             return;
         }
         console.log('entro time desc')
@@ -291,8 +281,8 @@ function MyCollections(props) {
             items: []
         });
     }
-    else if ('TimeAsc' == data.target.value) {
-        if (colSortOrd == 'asc' && colSort == 'collectionID') {
+    else if ('TimeAsc' === data.target.value) {
+        if (colSortOrd === 'asc' && colSort === 'collectionID') {
             return;
         }
         console.log('entro time asc')
@@ -304,8 +294,8 @@ function MyCollections(props) {
             items: []
         });
     }
-    else if ('TitleAsc' == data.target.value) {
-        if (colSortOrd == 'asc' && colSort == 'title') {
+    else if ('TitleAsc' === data.target.value) {
+        if (colSortOrd === 'asc' && colSort === 'title') {
             return;
         }
         console.log('entro title asc')
@@ -317,8 +307,8 @@ function MyCollections(props) {
             items: []
         });
     }
-    else if ('TitleDesc' == data.target.value) {
-        if (colSortOrd == 'desc' && colSort == 'title') {
+    else if ('TitleDesc' === data.target.value) {
+        if (colSortOrd === 'desc' && colSort === 'title') {
             return;
         }
         console.log('entro title desc')
